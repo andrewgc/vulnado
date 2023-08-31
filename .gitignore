@@ -25,3 +25,11 @@
 terraform.tfstate
 terraform.tfstate.backup
 terraform.tfstate.lock
+
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
