@@ -1,4 +1,4 @@
-# Vulnado - Intentionally Vulnerable Java Application.
+# Vulnado - Intentionally Vulnerable Java Application
 
 This application and exercises will take you through some of the OWASP top 10 Vulnerabilities and how to prevent them.
 
@@ -23,6 +23,3 @@ The docker network created by `docker-compose` maps pretty well to a multi-tier 
 * [XSS - Cross Site Scripting](exercises/02-xss.md)
 * [SSRF - Server Side Request Forgery](exercises/03-ssrf.md)
 * [RCE - Remote Code Execution & Reverse Shell](exercises/04-rce-reverse-shell.md)
-
-Test AGC1
-Test AGC2
