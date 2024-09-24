@@ -38,19 +38,20 @@ public class Comment {
     List<Comment> comments = new ArrayList();
     try {
       Connection cxn = Postgres.connection();
-      stmt = cxn.createStatement();
-
-      String query = "select * from comments;";
-      ResultSet rs = stmt.executeQuery(query);
-      while (rs.next()) {
-        String id = rs.getString("id");
-        String username = rs.getString("username");
-        String body = rs.getString("body");
-        Timestamp created_on = rs.getTimestamp("created_on");
-        Comment c = new Comment(id, username, body, created_on);
-        comments.add(c);
-      }
-      cxn.close();
+      try (Statement stmt = cxn.createStatement()) {
+    
+          String query = "select * from comments;";
+          ResultSet rs = stmt.executeQuery(query);
+          while (rs.next()) {
+            String id = rs.getString("id");
+            String username = rs.getString("username");
+            String body = rs.getString("body");
+            Timestamp created_on = rs.getTimestamp("created_on");
+            Comment c = new Comment(id, username, body, created_on);
+            comments.add(c);
+          }
+          cxn.close();
+         }
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println(e.getClass().getName()+": "+e.getMessage());

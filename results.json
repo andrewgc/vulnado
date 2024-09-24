@@ -1,0 +1,653 @@
+{
+   "_links": {
+      "root": {
+         "href": "/",
+         "name": "",
+         "templated": false
+      },
+      "self": {
+         "href": "/scans/dfdc9e28-e1e0-4644-9bca-f38724fa2ef8/findings",
+         "name": "",
+         "templated": false
+      },
+      "help": {
+         "href": "https://help.veracode.com/reader/tS9CaFwL4_lbIEWWomsJoA/ovfZGgu96UINQxIuTqRDwg",
+         "name": "",
+         "templated": false
+      },
+      "create": {
+         "href": "",
+         "name": "",
+         "templated": false
+      },
+      "start": {
+         "href": "",
+         "name": "",
+         "templated": false
+      },
+      "details": {
+         "href": "",
+         "name": "",
+         "templated": false
+      },
+      "upload": {
+         "href": "",
+         "name": "",
+         "templated": false
+      },
+      "cancel": {
+         "href": "",
+         "name": "",
+         "templated": false
+      }
+   },
+   "scan_id": "dfdc9e28-e1e0-4644-9bca-f38724fa2ef8",
+   "scan_status": "SUCCESS",
+   "message": "Scan successful. Results size: 26246 bytes",
+   "modules": [
+      "vulnado-0.0.1-SNAPSHOT.jar"
+   ],
+   "modules_count": 1,
+   "findings": [
+      {
+         "title": "java.lang.ProcessBuilder.start",
+         "issue_id": 1010,
+         "gob": "B",
+         "severity": 5,
+         "issue_type_id": "taint",
+         "issue_type": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+         "cwe_id": "78",
+         "display_text": "\u003cspan\u003eThis call to java.lang.ProcessBuilder.start() contains a command injection flaw.  The argument to the function is constructed using untrusted input.  If an attacker is allowed to specify all or part of the command, it may be possible to execute commands on the server with the privileges of the executing process.  The level of exposure depends on the effectiveness of input validation routines, if any. start() was called on the processBuilder object, which contains tainted data. The tainted data originated from an earlier call to AnnotationVirtualController.vc_annotation_entry.\u003c/span\u003e \u003cspan\u003eValidate all untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.  When using blocklists, be sure that the sanitizing routine performs a sufficient number of iterations to remove all instances of disallowed characters.  Most APIs that execute system commands also have a \"safe\" version of the method that takes an array of strings as input rather than a single string, which protects against some forms of command injection.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/78.html\"\u003eCWE\u003c/a\u003e \u003ca href=\"https://owasp.org/www-community/attacks/Command_Injection\"\u003eOWASP\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/Cowsay.java",
+               "line": 16,
+               "function_name": "run",
+               "qualified_function_name": "com.scalesec.vulnado.Cowsay.run",
+               "function_prototype": "java.lang.String run(java.lang.String)",
+               "scope": "com.scalesec.vulnado.Cowsay"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "2185720358",
+            "prototype_hash": "601693989",
+            "flaw_hash": "1480817290",
+            "flaw_hash_count": 2,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "2866949028",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "1522093433",
+            "cause_hash2_ordinal": "4"
+         },
+         "stack_dumps": {
+            "stack_dump": [
+               {
+                  "Frame": [
+                     {
+                        "FrameId": "0",
+                        "FunctionName": "run",
+                        "SourceFile": "com/scalesec/vulnado/Cowsay.java",
+                        "SourceLine": "15",
+                        "SourceFileId": "5",
+                        "StatementText": {},
+                        "QualifiedFunctionName": "com.scalesec.vulnado.Cowsay.run",
+                        "FunctionPrototype": "java.lang.String run(java.lang.String)",
+                        "RelativeLocation": "50"
+                     },
+                     {
+                        "FrameId": "1",
+                        "FunctionName": "run",
+                        "SourceFile": "com/scalesec/vulnado/Cowsay.java",
+                        "SourceLine": "7",
+                        "SourceFileId": "5",
+                        "StatementText": {},
+                        "VarNames": "new java.lang.ProcessBuilder(new java.lang.String[0])",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.Cowsay.run",
+                        "FunctionPrototype": "java.lang.String run(java.lang.String)",
+                        "RelativeLocation": "7"
+                     },
+                     {
+                        "FrameId": "2",
+                        "FunctionName": "run",
+                        "SourceFile": "com/scalesec/vulnado/Cowsay.java",
+                        "SourceLine": "7",
+                        "SourceFileId": "5",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC defscope id=\"10124\" */java.lang.String input/**X-VC /defscope */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.Cowsay.run",
+                        "FunctionPrototype": "java.lang.String run(java.lang.String)",
+                        "RelativeLocation": "0"
+                     },
+                     {
+                        "FrameId": "3",
+                        "FunctionName": "cowsay",
+                        "SourceFile": "com/scalesec/vulnado/CowController.java",
+                        "SourceLine": "12",
+                        "SourceFileId": "4",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"10043\" */input/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.CowController.cowsay",
+                        "FunctionPrototype": "java.lang.String cowsay(java.lang.String)",
+                        "RelativeLocation": "80"
+                     },
+                     {
+                        "FrameId": "4",
+                        "FunctionName": "cowsay",
+                        "SourceFile": "com/scalesec/vulnado/CowController.java",
+                        "SourceLine": "12",
+                        "SourceFileId": "4",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC defscope id=\"10043\" */java.lang.String input/**X-VC /defscope */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.CowController.cowsay",
+                        "FunctionPrototype": "java.lang.String cowsay(java.lang.String)",
+                        "RelativeLocation": "0"
+                     },
+                     {
+                        "FrameId": "5",
+                        "FunctionName": "vc_annotation_entry",
+                        "SourceFile": "UNKNOWN",
+                        "SourceLine": "-1",
+                        "SourceFileId": "-1",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"44112\" */np8/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "AnnotationVirtualController.vc_annotation_entry",
+                        "FunctionPrototype": "void vc_annotation_entry(java.lang.String)"
+                     }
+                  ]
+               }
+            ]
+         },
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/78.html"
+      },
+      {
+         "title": "java.sql.Statement.executeQuery",
+         "issue_id": 1002,
+         "gob": "B",
+         "severity": 4,
+         "issue_type_id": "taint",
+         "issue_type": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+         "cwe_id": "89",
+         "display_text": "\u003cspan\u003eThis database query contains a SQL injection flaw.  The call to java.sql.Statement.executeQuery() constructs a dynamic SQL query using a variable derived from untrusted input.  An attacker could exploit this flaw to execute arbitrary SQL queries against the database. The first argument to executeQuery() contains tainted data from the variable query. The tainted data originated from an earlier call to AnnotationVirtualController.vc_annotation_entry.\u003c/span\u003e \u003cspan\u003eAvoid dynamically constructing SQL queries.  Instead, use parameterized prepared statements to prevent the database from interpreting the contents of bind variables as part of the query.  Always validate untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/89.html\"\u003eCWE\u003c/a\u003e \u003ca href=\"https://owasp.org/www-community/attacks/SQL_Injection\"\u003eOWASP\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/User.java",
+               "line": 49,
+               "function_name": "fetch",
+               "qualified_function_name": "com.scalesec.vulnado.User.fetch",
+               "function_prototype": "User fetch(java.lang.String)",
+               "scope": "com.scalesec.vulnado.User"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "3812293375",
+            "prototype_hash": "3282633836",
+            "flaw_hash": "3392777041",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "1176028798",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "1522093433",
+            "cause_hash2_ordinal": "5"
+         },
+         "stack_dumps": {
+            "stack_dump": [
+               {
+                  "Frame": [
+                     {
+                        "FrameId": "0",
+                        "FunctionName": "fetch",
+                        "SourceFile": "com/scalesec/vulnado/User.java",
+                        "SourceLine": "48",
+                        "SourceFileId": "10",
+                        "StatementText": {},
+                        "QualifiedFunctionName": "com.scalesec.vulnado.User.fetch",
+                        "FunctionPrototype": "User fetch(java.lang.String)",
+                        "RelativeLocation": "35"
+                     },
+                     {
+                        "FrameId": "1",
+                        "FunctionName": "fetch",
+                        "SourceFile": "com/scalesec/vulnado/User.java",
+                        "SourceLine": "46",
+                        "SourceFileId": "10",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"10959\" */un/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.User.fetch",
+                        "FunctionPrototype": "User fetch(java.lang.String)",
+                        "RelativeLocation": "25"
+                     },
+                     {
+                        "FrameId": "2",
+                        "FunctionName": "fetch",
+                        "SourceFile": "com/scalesec/vulnado/User.java",
+                        "SourceLine": "39",
+                        "SourceFileId": "10",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC defscope id=\"10959\" */java.lang.String un/**X-VC /defscope */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.User.fetch",
+                        "FunctionPrototype": "User fetch(java.lang.String)",
+                        "RelativeLocation": "0"
+                     },
+                     {
+                        "FrameId": "3",
+                        "FunctionName": "login",
+                        "SourceFile": "com/scalesec/vulnado/LoginController.java",
+                        "SourceLine": "19",
+                        "SourceFileId": "8",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"10455\" */input/**X-VC /scoperef */./**X-VC scoperef targetid=\"10521\" */username/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.LoginController.login",
+                        "FunctionPrototype": "LoginResponse login(LoginRequest)",
+                        "RelativeLocation": "13"
+                     },
+                     {
+                        "FrameId": "4",
+                        "FunctionName": "set_username",
+                        "SourceFile": "UNKNOWN",
+                        "SourceLine": "-1",
+                        "SourceFileId": "-1",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC defscope id=\"43990\" */java.lang.String value/**X-VC /defscope */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.LoginRequest.set_username",
+                        "FunctionPrototype": "void set_username(java.lang.String)"
+                     },
+                     {
+                        "FrameId": "5",
+                        "FunctionName": "vc_annotation_entry",
+                        "SourceFile": "UNKNOWN",
+                        "SourceLine": "-1",
+                        "SourceFileId": "-1",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"43900\" */param1/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "AnnotationVirtualController.vc_annotation_entry",
+                        "FunctionPrototype": "void vc_annotation_entry(java.lang.String)"
+                     }
+                  ]
+               }
+            ]
+         },
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/89.html"
+      },
+      {
+         "title": "java.security.MessageDigest.getInstance",
+         "issue_id": 1009,
+         "gob": "B",
+         "severity": 3,
+         "issue_type_id": "crypto",
+         "issue_type": "Use of a Broken or Risky Cryptographic Algorithm",
+         "cwe_id": "327",
+         "display_text": "\u003cspan\u003eThis function uses the MD5() function, which uses a hash algorithm that is considered weak. In recent years, researchers have demonstrated ways to breach many uses of previously-thought-safe hash functions such as MD5. \u003c/span\u003e \u003cspan\u003eConsider using a stronger algorithm in order to prevent attackers from being able to manipulate hash results. If this algorithm is being used to hash passwords, then consider using a strong computationally-hard algorithm such as PBKDF2 or bcrypt instead of a plain hashing algorithm.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/327.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/Postgres.java",
+               "line": 67,
+               "function_name": "md5",
+               "qualified_function_name": "com.scalesec.vulnado.Postgres.md5",
+               "function_prototype": "java.lang.String md5(java.lang.String)",
+               "scope": "com.scalesec.vulnado.Postgres"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "1454893192",
+            "prototype_hash": "4188150126",
+            "flaw_hash": "1900691328",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "1787533810",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/327.html"
+      },
+      {
+         "title": "cowsay",
+         "issue_id": 1000,
+         "gob": "B",
+         "severity": 3,
+         "issue_type_id": "taint",
+         "issue_type": "Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)",
+         "cwe_id": "80",
+         "display_text": "\u003cspan\u003eThis call to cowsay() contains a cross-site scripting (XSS) flaw.  The application populates the HTTP response with untrusted input, allowing an attacker to embed malicious content, such as Javascript code, which will be executed in the context of the victim's browser.  XSS vulnerabilities are commonly exploited to steal or manipulate cookies, modify presentation of content, and compromise confidential information, with new attack vectors being discovered on a regular basis. The tainted data originated from earlier calls to AnnotationVirtualController.vc_annotation_entry, and java.lang.Process.getInputStream.\u003c/span\u003e \u003cspan\u003eUse contextual escaping on all untrusted data before using it to construct any portion of an HTTP response.  The escaping method should be chosen based on the specific use case of the untrusted data, otherwise it may not protect fully against the attack. For example, if the data is being written to the body of an HTML page, use HTML entity escaping; if the data is being written to an attribute, use attribute escaping; etc.  Both the OWASP Java Encoder library and the Microsoft AntiXSS library provide contextual escaping methods. For more details on contextual escaping, see https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md. In addition, as a best practice, always validate untrusted input to ensure that it conforms to the expected format, using centralized data validation routines when possible.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/79.html\"\u003eCWE\u003c/a\u003e \u003ca href=\"https://owasp.org/www-community/attacks/xss/\"\u003eOWASP\u003c/a\u003e \u003ca href=\"https://docs.veracode.com/r/review_cleansers\"\u003eSupported Cleansers\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/CowController.java",
+               "line": 13,
+               "function_name": "cowsay",
+               "qualified_function_name": "com.scalesec.vulnado.CowController.cowsay",
+               "function_prototype": "java.lang.String cowsay(java.lang.String)",
+               "scope": "com.scalesec.vulnado.CowController"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "2350331025",
+            "prototype_hash": "4018040713",
+            "flaw_hash": "3152419664",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "2866949028",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "2866949028",
+            "cause_hash2_ordinal": "1"
+         },
+         "stack_dumps": {
+            "stack_dump": [
+               {
+                  "Frame": [
+                     {
+                        "FrameId": "0",
+                        "FunctionName": "cowsay",
+                        "SourceFile": "com/scalesec/vulnado/CowController.java",
+                        "SourceLine": "12",
+                        "SourceFileId": "4",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"10122\" */Cowsay.run/**X-VC /scoperef */(/**X-VC scoperef targetid=\"10043\" */input/**X-VC /scoperef */)",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.CowController.cowsay",
+                        "FunctionPrototype": "java.lang.String cowsay(java.lang.String)",
+                        "RelativeLocation": "80"
+                     },
+                     {
+                        "FrameId": "1",
+                        "FunctionName": "run",
+                        "SourceFile": "com/scalesec/vulnado/Cowsay.java",
+                        "SourceLine": "9",
+                        "SourceFileId": "5",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"24988\" */java.lang.System.out/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.Cowsay.run",
+                        "FunctionPrototype": "java.lang.String run(java.lang.String)",
+                        "RelativeLocation": "26"
+                     },
+                     {
+                        "FrameId": "2",
+                        "FunctionName": "run",
+                        "SourceFile": "com/scalesec/vulnado/Cowsay.java",
+                        "SourceLine": "7",
+                        "SourceFileId": "5",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC defscope id=\"10124\" */java.lang.String input/**X-VC /defscope */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.Cowsay.run",
+                        "FunctionPrototype": "java.lang.String run(java.lang.String)",
+                        "RelativeLocation": "0"
+                     },
+                     {
+                        "FrameId": "3",
+                        "FunctionName": "cowsay",
+                        "SourceFile": "com/scalesec/vulnado/CowController.java",
+                        "SourceLine": "12",
+                        "SourceFileId": "4",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"10043\" */input/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.CowController.cowsay",
+                        "FunctionPrototype": "java.lang.String cowsay(java.lang.String)",
+                        "RelativeLocation": "80"
+                     },
+                     {
+                        "FrameId": "4",
+                        "FunctionName": "cowsay",
+                        "SourceFile": "com/scalesec/vulnado/CowController.java",
+                        "SourceLine": "12",
+                        "SourceFileId": "4",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC defscope id=\"10043\" */java.lang.String input/**X-VC /defscope */",
+                        "QualifiedFunctionName": "com.scalesec.vulnado.CowController.cowsay",
+                        "FunctionPrototype": "java.lang.String cowsay(java.lang.String)",
+                        "RelativeLocation": "0"
+                     },
+                     {
+                        "FrameId": "5",
+                        "FunctionName": "vc_annotation_entry",
+                        "SourceFile": "UNKNOWN",
+                        "SourceLine": "-1",
+                        "SourceFileId": "-1",
+                        "StatementText": {},
+                        "VarNames": "/**X-VC scoperef targetid=\"44112\" */np8/**X-VC /scoperef */",
+                        "QualifiedFunctionName": "AnnotationVirtualController.vc_annotation_entry",
+                        "FunctionPrototype": "void vc_annotation_entry(java.lang.String)"
+                     }
+                  ]
+               }
+            ]
+         },
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/80.html"
+      },
+      {
+         "title": "app.secret",
+         "issue_id": 1001,
+         "gob": "B",
+         "severity": 3,
+         "issue_type_id": "crypto",
+         "issue_type": "Use of Hard-coded Password",
+         "cwe_id": "259",
+         "display_text": "\u003cspan\u003eThis variable assignment uses a hard-coded password that may compromise system security in a way that cannot be easily remedied.  The use of a hard-coded password significantly increases the possibility that the account being protected will be compromised.  Moreover, the password cannot be changed without patching the software.  If a hard-coded password is compromised in a commercial product, all deployed instances may be vulnerable to attack.  In some cases, this finding may indicate a reference to a password (e.g. the name of a key in a properties file) rather than an actual password. app.secret\u003c/span\u003e \u003cspan\u003eStore passwords out-of-band from the application code.  Follow best practices for protecting credentials stored in locations such as configuration or properties files. An HSM may be appropriate for particularly sensitive credentials.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/259.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "BOOT-INF/classes/application.properties",
+               "line": 1,
+               "function_name": "application",
+               "qualified_function_name": "application.properties.application.properties.application",
+               "function_prototype": "void application(void)",
+               "scope": "application.properties.application.properties"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "2093486087",
+            "prototype_hash": "211846691",
+            "flaw_hash": "2029476002",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "3812243187",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/259.html"
+      },
+      {
+         "title": "java.sql.Connection.createStatement",
+         "issue_id": 1008,
+         "gob": "B",
+         "issue_type_id": "reliability",
+         "issue_type": "Improper Resource Shutdown or Release",
+         "cwe_id": "404",
+         "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable stmt, which was previously allocated by a call to java.sql.Connection.createStatement().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/User.java",
+               "line": 44,
+               "function_name": "fetch",
+               "qualified_function_name": "com.scalesec.vulnado.User.fetch",
+               "function_prototype": "User fetch(java.lang.String)",
+               "scope": "com.scalesec.vulnado.User"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "3812293375",
+            "prototype_hash": "3282633836",
+            "flaw_hash": "1480817290",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "2866949028",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      },
+      {
+         "title": "java.sql.Statement.executeQuery",
+         "issue_id": 1004,
+         "gob": "B",
+         "issue_type_id": "reliability",
+         "issue_type": "Improper Resource Shutdown or Release",
+         "cwe_id": "404",
+         "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable rs, which was previously allocated by a call to java.sql.Statement.executeQuery().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/User.java",
+               "line": 49,
+               "function_name": "fetch",
+               "qualified_function_name": "com.scalesec.vulnado.User.fetch",
+               "function_prototype": "User fetch(java.lang.String)",
+               "scope": "com.scalesec.vulnado.User"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "3812293375",
+            "prototype_hash": "3282633836",
+            "flaw_hash": "3392777041",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "1176028798",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      },
+      {
+         "title": "java.sql.Connection.createStatement",
+         "issue_id": 1007,
+         "gob": "B",
+         "issue_type_id": "reliability",
+         "issue_type": "Improper Resource Shutdown or Release",
+         "cwe_id": "404",
+         "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable stmt, which was previously allocated by a call to java.sql.Connection.createStatement().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/Postgres.java",
+               "line": 35,
+               "function_name": "setup",
+               "qualified_function_name": "com.scalesec.vulnado.Postgres.setup",
+               "function_prototype": "void setup(void)",
+               "scope": "com.scalesec.vulnado.Postgres"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "2086262187",
+            "prototype_hash": "211846691",
+            "flaw_hash": "1480817290",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "2866949028",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      },
+      {
+         "title": "java.io.BufferedReader.!operator_javanewinit",
+         "issue_id": 1005,
+         "gob": "B",
+         "issue_type_id": "reliability",
+         "issue_type": "Improper Resource Shutdown or Release",
+         "cwe_id": "404",
+         "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable reader, which was previously allocated by a call to java.io.BufferedReader.!operator_javanewinit().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/Cowsay.java",
+               "line": 17,
+               "function_name": "run",
+               "qualified_function_name": "com.scalesec.vulnado.Cowsay.run",
+               "function_prototype": "java.lang.String run(java.lang.String)",
+               "scope": "com.scalesec.vulnado.Cowsay"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "2185720358",
+            "prototype_hash": "601693989",
+            "flaw_hash": "1419674411",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "596026696",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      },
+      {
+         "title": "java.sql.Connection.createStatement",
+         "issue_id": 1006,
+         "gob": "B",
+         "issue_type_id": "reliability",
+         "issue_type": "Improper Resource Shutdown or Release",
+         "cwe_id": "404",
+         "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable stmt, which was previously allocated by a call to java.sql.Connection.createStatement().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/Comment.java",
+               "line": 41,
+               "function_name": "fetch_all",
+               "qualified_function_name": "com.scalesec.vulnado.Comment.fetch_all",
+               "function_prototype": "java.util.List fetch_all(void)",
+               "scope": "com.scalesec.vulnado.Comment"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "4133311209",
+            "prototype_hash": "4146034803",
+            "flaw_hash": "1480817290",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "2866949028",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      },
+      {
+         "title": "java.sql.Statement.executeQuery",
+         "issue_id": 1003,
+         "gob": "B",
+         "issue_type_id": "reliability",
+         "issue_type": "Improper Resource Shutdown or Release",
+         "cwe_id": "404",
+         "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable rs, which was previously allocated by a call to java.sql.Statement.executeQuery().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href=\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
+         "files": {
+            "source_file": {
+               "file": "com/scalesec/vulnado/Comment.java",
+               "line": 44,
+               "function_name": "fetch_all",
+               "qualified_function_name": "com.scalesec.vulnado.Comment.fetch_all",
+               "function_prototype": "java.util.List fetch_all(void)",
+               "scope": "com.scalesec.vulnado.Comment"
+            }
+         },
+         "flaw_match": {
+            "procedure_hash": "4133311209",
+            "prototype_hash": "4146034803",
+            "flaw_hash": "3392777041",
+            "flaw_hash_count": 1,
+            "flaw_hash_ordinal": 1,
+            "cause_hash": "1176028798",
+            "cause_hash_count": 1,
+            "cause_hash_ordinal": 1,
+            "cause_hash2": "0",
+            "cause_hash2_ordinal": "0"
+         },
+         "stack_dumps": {},
+         "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
+      }
+   ],
+   "selected_modules": []
+}
